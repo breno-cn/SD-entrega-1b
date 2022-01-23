@@ -10,7 +10,7 @@ import grpc
 
 class PageServer(PageServicer):
     
-    MAX_STORAGE_SERVERS = 10
+    MAX_STORAGE_SERVERS = 1
 
     def __init__(self) -> None:
         super().__init__()
