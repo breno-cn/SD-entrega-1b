@@ -4,6 +4,8 @@ from ClientToPage_pb2 import AnnounceRequest
 from Storage_pb2_grpc import StorageServicer
 from Storage_pb2 import StorageResponse
 
+from Storage_pb2_grpc import add_StorageServicer_to_server
+
 from Hashtable import Hashtable
 from concurrent import futures
 import sys
@@ -71,7 +73,8 @@ def serve():
     port = 12345
     storageServer = StorageServer(name, host, port)
 
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+    add_StorageServicer_to_server(storageServer, server)
     # add_PageServicer_to_server(PageServer(), server)
 
     server.add_insecure_port(f'[::]:{port}')

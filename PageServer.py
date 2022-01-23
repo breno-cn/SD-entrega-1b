@@ -2,6 +2,7 @@ from ClientToPage_pb2_grpc import PageServicer
 from ClientToPage_pb2_grpc import add_PageServicer_to_server
 
 from ClientToPage_pb2 import Response
+from ClientToPage_pb2 import FindResponse
 
 from Hashtable import Hashtable
 from concurrent import futures
@@ -22,7 +23,7 @@ class PageServer(PageServicer):
         address = request.address
     
         status = self.servers.create(name, address)
-        if status.status == 5:
+        if status == 4:
             self.addressesIndex[self.currentStorageServers] = address
             self.currentStorageServers += 1
 
@@ -39,7 +40,7 @@ class PageServer(PageServicer):
 
         index = sum % PageServer.MAX_STORAGE_SERVERS
 
-        return self.addressesIndex[index]
+        return FindResponse(address=self.addressesIndex[index])
 
 
 def serve():
