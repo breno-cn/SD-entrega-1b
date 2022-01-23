@@ -7,10 +7,20 @@ from ClientToPage_pb2 import FindResponse
 from Hashtable import Hashtable
 from concurrent import futures
 import grpc
+import argparse
+import sys
+
+def getMaxServers():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('maxServers', type=int)
+
+    args = parser.parse_args()
+
+    return int(args.maxServers)
 
 class PageServer(PageServicer):
     
-    MAX_STORAGE_SERVERS = 1
+    MAX_STORAGE_SERVERS = getMaxServers()
 
     def __init__(self) -> None:
         super().__init__()

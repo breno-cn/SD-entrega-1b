@@ -10,6 +10,18 @@ from Hashtable import Hashtable
 from concurrent import futures
 import sys
 import grpc
+import argparse
+
+def getArgs():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('name', type=str)
+    parser.add_argument('host', type=str)
+    parser.add_argument('port', type=str)
+
+    args = parser.parse_args()
+
+    return args.name, args.host, int(args.port)
+
 
 class StorageServer(StorageServicer):
 
@@ -68,14 +80,11 @@ class StorageServer(StorageServicer):
 
 
 def serve():
-    name = 'test'
-    host = 'localhost'
-    port = 12345
+    name, host, port = getArgs()
     storageServer = StorageServer(name, host, port)
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
     add_StorageServicer_to_server(storageServer, server)
-    # add_PageServicer_to_server(PageServer(), server)
 
     server.add_insecure_port(f'[::]:{port}')
     server.start()
