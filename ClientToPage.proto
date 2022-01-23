@@ -5,10 +5,19 @@ message AnnounceRequest {
     string address = 2;
 }
 
+message FindRequest {
+    string key = 1;
+}
+
 message Response {
     int32 status = 1;
 }
 
+message FindResponse {
+    string address = 1;
+}
+
 service Page {
     rpc announce (AnnounceRequest) returns (Response);
+    rpc findKey (FindRequest) returns (FindResponse);
 }

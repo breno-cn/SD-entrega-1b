@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12\x43lientToPage.proto\"0\n\x0f\x41nnounceRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x02 \x01(\t\"\x1a\n\x08Response\x12\x0e\n\x06status\x18\x01 \x01(\x05\x32/\n\x04Page\x12\'\n\x08\x61nnounce\x12\x10.AnnounceRequest\x1a\t.Responseb\x06proto3'
+  serialized_pb=b'\n\x12\x43lientToPage.proto\"0\n\x0f\x41nnounceRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x02 \x01(\t\"\x1a\n\x0b\x46indRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\"\x1a\n\x08Response\x12\x0e\n\x06status\x18\x01 \x01(\x05\"\x1f\n\x0c\x46indResponse\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t2W\n\x04Page\x12\'\n\x08\x61nnounce\x12\x10.AnnounceRequest\x1a\t.Response\x12&\n\x07\x66indKey\x12\x0c.FindRequest\x1a\r.FindResponseb\x06proto3'
 )
 
 
@@ -64,6 +64,38 @@ _ANNOUNCEREQUEST = _descriptor.Descriptor(
 )
 
 
+_FINDREQUEST = _descriptor.Descriptor(
+  name='FindRequest',
+  full_name='FindRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='FindRequest.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=72,
+  serialized_end=98,
+)
+
+
 _RESPONSE = _descriptor.Descriptor(
   name='Response',
   full_name='Response',
@@ -91,12 +123,46 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=72,
-  serialized_end=98,
+  serialized_start=100,
+  serialized_end=126,
+)
+
+
+_FINDRESPONSE = _descriptor.Descriptor(
+  name='FindResponse',
+  full_name='FindResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='address', full_name='FindResponse.address', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=128,
+  serialized_end=159,
 )
 
 DESCRIPTOR.message_types_by_name['AnnounceRequest'] = _ANNOUNCEREQUEST
+DESCRIPTOR.message_types_by_name['FindRequest'] = _FINDREQUEST
 DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
+DESCRIPTOR.message_types_by_name['FindResponse'] = _FINDRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AnnounceRequest = _reflection.GeneratedProtocolMessageType('AnnounceRequest', (_message.Message,), {
@@ -106,12 +172,26 @@ AnnounceRequest = _reflection.GeneratedProtocolMessageType('AnnounceRequest', (_
   })
 _sym_db.RegisterMessage(AnnounceRequest)
 
+FindRequest = _reflection.GeneratedProtocolMessageType('FindRequest', (_message.Message,), {
+  'DESCRIPTOR' : _FINDREQUEST,
+  '__module__' : 'ClientToPage_pb2'
+  # @@protoc_insertion_point(class_scope:FindRequest)
+  })
+_sym_db.RegisterMessage(FindRequest)
+
 Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Message,), {
   'DESCRIPTOR' : _RESPONSE,
   '__module__' : 'ClientToPage_pb2'
   # @@protoc_insertion_point(class_scope:Response)
   })
 _sym_db.RegisterMessage(Response)
+
+FindResponse = _reflection.GeneratedProtocolMessageType('FindResponse', (_message.Message,), {
+  'DESCRIPTOR' : _FINDRESPONSE,
+  '__module__' : 'ClientToPage_pb2'
+  # @@protoc_insertion_point(class_scope:FindResponse)
+  })
+_sym_db.RegisterMessage(FindResponse)
 
 
 
@@ -122,8 +202,8 @@ _PAGE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=100,
-  serialized_end=147,
+  serialized_start=161,
+  serialized_end=248,
   methods=[
   _descriptor.MethodDescriptor(
     name='announce',
@@ -132,6 +212,16 @@ _PAGE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_ANNOUNCEREQUEST,
     output_type=_RESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='findKey',
+    full_name='Page.findKey',
+    index=1,
+    containing_service=None,
+    input_type=_FINDREQUEST,
+    output_type=_FINDRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

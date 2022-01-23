@@ -9,17 +9,37 @@ import grpc
 
 class PageServer(PageServicer):
     
+    MAX_STORAGE_SERVERS = 10
+
     def __init__(self) -> None:
         super().__init__()
         self.servers = Hashtable()
+        self.addressesIndex = [''] * PageServer.MAX_STORAGE_SERVERS
+        self.currentStorageServers = 0
 
     def announce(self, request, context):
         name = request.name
         address = request.address
     
         status = self.servers.create(name, address)
+        if status.status == 5:
+            self.addressesIndex[self.currentStorageServers] = address
+            self.currentStorageServers += 1
 
         return Response(status=status)
+
+    def findKey(self, request, context):
+        keyBytes = bytes(request.key, 'ascii')
+        p = 31
+        i = 0
+        sum = 0
+
+        for byte in keyBytes:
+            sum += byte * (p ** i)
+
+        index = sum % PageServer.MAX_STORAGE_SERVERS
+
+        return self.addressesIndex[index]
 
 
 def serve():
