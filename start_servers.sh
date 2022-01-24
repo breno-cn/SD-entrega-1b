@@ -28,7 +28,7 @@ echo "Os servidores de armazenamento serao criados..."
 storagePids=()
 end=$(($initialPort + $maxStorageServers - 1))
 for i in $(seq $initialPort $end); do
-    python3 StorageServer.py "server-$i" localhost $i & disown
+    python3 StorageServer.py "server$i" localhost $i & disown
     serverPid=$!
     storagePids+=($serverPid)
     echo "Servidor $serverPid criado..."
@@ -41,12 +41,9 @@ BURN_IT
 echo "Matando processo do servidor de paginas de pid $pageServerPid..."
 kill -9 $pageServerPid
 
-# TODO: nao consigo pegar o pid de todos os servidores de armazenamento?????
-# caso o servidor nao esteja funcionando, pkill -9 python resolve
-# nao eh o ideal...
-
 echo "Matando servidores de armazenamento..."
-for i in $storagePids; do
-    echo "Matando processo de pid $i..."
-    kill -9 $i
+for i in $(seq $initialPort $end) ; do
+    processName="server$i"
+    echo "Matando processo $processName..."
+    pkill -9 $processName
 done
