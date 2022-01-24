@@ -28,7 +28,7 @@ echo "Os servidores de armazenamento serao criados..."
 storagePids=()
 end=$(($initialPort + $maxStorageServers - 1))
 for i in $(seq $initialPort $end); do
-    python3 StorageServer.py "server-$i" localhost $i  &
+    python3 StorageServer.py "server-$i" localhost $i &
     serverPid=$!
     storagePids+=($serverPid)
     echo "Servidor $serverPid criado..."
