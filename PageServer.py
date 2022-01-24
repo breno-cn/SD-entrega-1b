@@ -1,8 +1,8 @@
-from ClientToPage_pb2_grpc import PageServicer
-from ClientToPage_pb2_grpc import add_PageServicer_to_server
+from PageServer_pb2_grpc import PageServicer
+from PageServer_pb2_grpc import add_PageServicer_to_server
 
-from ClientToPage_pb2 import Response
-from ClientToPage_pb2 import FindResponse
+from PageServer_pb2 import Response
+from PageServer_pb2 import FindResponse
 
 from Hashtable import Hashtable
 from concurrent import futures

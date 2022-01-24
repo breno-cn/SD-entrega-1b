@@ -1,5 +1,5 @@
-from ClientToPage_pb2_grpc import PageStub
-from ClientToPage_pb2 import AnnounceRequest
+from PageServer_pb2_grpc import PageStub
+from PageServer_pb2 import AnnounceRequest
 
 from Storage_pb2_grpc import StorageServicer
 from Storage_pb2 import StorageResponse

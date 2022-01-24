@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import ClientToPage_pb2 as ClientToPage__pb2
+import PageServer_pb2 as PageServer__pb2
 
 
 class PageStub(object):
@@ -16,13 +16,13 @@ class PageStub(object):
         """
         self.announce = channel.unary_unary(
                 '/Page/announce',
-                request_serializer=ClientToPage__pb2.AnnounceRequest.SerializeToString,
-                response_deserializer=ClientToPage__pb2.Response.FromString,
+                request_serializer=PageServer__pb2.AnnounceRequest.SerializeToString,
+                response_deserializer=PageServer__pb2.Response.FromString,
                 )
         self.findKey = channel.unary_unary(
                 '/Page/findKey',
-                request_serializer=ClientToPage__pb2.FindRequest.SerializeToString,
-                response_deserializer=ClientToPage__pb2.FindResponse.FromString,
+                request_serializer=PageServer__pb2.FindRequest.SerializeToString,
+                response_deserializer=PageServer__pb2.FindResponse.FromString,
                 )
 
 
@@ -46,13 +46,13 @@ def add_PageServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'announce': grpc.unary_unary_rpc_method_handler(
                     servicer.announce,
-                    request_deserializer=ClientToPage__pb2.AnnounceRequest.FromString,
-                    response_serializer=ClientToPage__pb2.Response.SerializeToString,
+                    request_deserializer=PageServer__pb2.AnnounceRequest.FromString,
+                    response_serializer=PageServer__pb2.Response.SerializeToString,
             ),
             'findKey': grpc.unary_unary_rpc_method_handler(
                     servicer.findKey,
-                    request_deserializer=ClientToPage__pb2.FindRequest.FromString,
-                    response_serializer=ClientToPage__pb2.FindResponse.SerializeToString,
+                    request_deserializer=PageServer__pb2.FindRequest.FromString,
+                    response_serializer=PageServer__pb2.FindResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -76,8 +76,8 @@ class Page(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Page/announce',
-            ClientToPage__pb2.AnnounceRequest.SerializeToString,
-            ClientToPage__pb2.Response.FromString,
+            PageServer__pb2.AnnounceRequest.SerializeToString,
+            PageServer__pb2.Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -93,7 +93,7 @@ class Page(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Page/findKey',
-            ClientToPage__pb2.FindRequest.SerializeToString,
-            ClientToPage__pb2.FindResponse.FromString,
+            PageServer__pb2.FindRequest.SerializeToString,
+            PageServer__pb2.FindResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
