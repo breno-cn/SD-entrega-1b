@@ -41,6 +41,10 @@ BURN_IT
 echo "Matando processo do servidor de paginas de pid $pageServerPid..."
 kill -9 $pageServerPid
 
+# TODO: nao consigo pegar o pid de todos os servidores de armazenamento?????
+# caso o servidor nao esteja funcionando, pkill -9 python resolve
+# nao eh o ideal...
+
 echo "Matando servidores de armazenamento..."
 for i in $storagePids; do
     echo "Matando processo de pid $i..."
