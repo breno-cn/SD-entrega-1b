@@ -45,6 +45,8 @@ class StorageServer(StorageServicer):
             print('Servidor de armazenamento criado com sucesso...')
 
     def create(self, request, context):
+        print(f'On server {self.name}')
+
         key = request.key
         value = request.value
         print(f'key {key} value {value}')
@@ -54,6 +56,8 @@ class StorageServer(StorageServicer):
         return StorageResponse(status=status)
     
     def read(self, request, context):
+        print(f'On server {self.name}')
+
         key = request.key
         readResponse = self.hashtable.read(key)
         
@@ -65,6 +69,8 @@ class StorageServer(StorageServicer):
         return StorageResponse(status=5, value='')
 
     def update(self, request, context):
+        print(f'On server {self.name}')
+
         key = request.key
         value = request.value
         status = self.hashtable.update(key, value)
@@ -72,6 +78,8 @@ class StorageServer(StorageServicer):
         return StorageResponse(status=status)
 
     def delete(self, request, context):
+        print(f'On server {self.name}')
+        
         key = request.key
         status = self.hashtable.delete(key)
 

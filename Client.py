@@ -1,5 +1,5 @@
-from ClientToPage_pb2 import FindRequest
-from ClientToPage_pb2_grpc import PageStub
+from PageServer_pb2 import FindRequest
+from PageServer_pb2_grpc import PageStub
 
 import grpc
 from Storage_pb2 import Request
