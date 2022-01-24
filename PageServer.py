@@ -47,6 +47,7 @@ class PageServer(PageServicer):
 
         for byte in keyBytes:
             sum += byte * (p ** i)
+            i += 1
 
         index = sum % PageServer.MAX_STORAGE_SERVERS
 
