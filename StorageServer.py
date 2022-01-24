@@ -8,6 +8,8 @@ from Storage_pb2_grpc import add_StorageServicer_to_server
 
 from Hashtable import Hashtable
 from concurrent import futures
+from setproctitle import setproctitle
+
 import sys
 import grpc
 import argparse
@@ -29,6 +31,8 @@ class StorageServer(StorageServicer):
         self.hashtable = Hashtable()
         self.name = name
         self.address = f'{host}:{port}'
+
+        setproctitle(name)
 
         with grpc.insecure_channel('localhost:50051') as channel:
             pageServerStub = PageStub(channel)
