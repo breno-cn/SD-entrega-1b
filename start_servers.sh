@@ -18,17 +18,17 @@ initialPort=$2
 echo "Serao criados $maxStorageServers servidores a partir da porta $initialPort"
 
 echo "Iniciando servidor de paginas..."
-python3 PageServer.py $maxStorageServers & 2> /dev/null
+python3 PageServer.py $maxStorageServers & 
 pageServerPid=$!
 echo "O servidor de paginas foi iniciado no pid $pageServerPid"
 
-sleep 5
+sleep 1
 
 echo "Os servidores de armazenamento serao criados..."
 storagePids=()
 end=$(($initialPort + $maxStorageServers - 1))
 for i in $(seq $initialPort $end); do
-    python3 StorageServer.py "server-$i" localhost $i & 2> /dev/null
+    python3 StorageServer.py "server-$i" localhost $i  &
     serverPid=$!
     storagePids+=($serverPid)
     echo "Servidor $serverPid criado..."
